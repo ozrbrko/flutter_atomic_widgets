@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_atomic_widgets/atomic_widgets.dart';
+
 TextEditingController  InputController = TextEditingController();
+TextEditingController  DateController = TextEditingController();
+TextEditingController  TimeController = TextEditingController();
 
 void main() {
   runApp(const MyApp());
@@ -16,6 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -23,8 +27,6 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
-
-
 
   final String title;
 
@@ -36,15 +38,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      appBar: customAppBar(context, true, "My App"),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-
 
             customTextFormField("Username", InputController, TextInputType.text, true),
 
@@ -53,7 +53,15 @@ class _MyHomePageState extends State<MyHomePage> {
             customElevatedButton("My Custom Button", Colors.black, Colors.white, 10, () {
               print("Clicked Elevated Button");
               print("Login info: ${InputController.text}");
-            })
+            }),
+
+            SizedBox(height: 20,),
+
+            customDateTextFormField(context, DateController),  // CustomDateWidget
+
+            SizedBox(height: 20,),
+
+            customTimeTextFormField(context, TimeController),  // CustomTimeWidget
 
           ],
         ),
